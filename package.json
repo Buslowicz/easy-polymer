@@ -1,9 +1,9 @@
 {
   "name": "easy-polymer",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "EaSy Polymer is a set of ES7/TS decorators for Polymer to save on boilerplate",
-  "main": "es5/esp.js",
-  "jsnext:main": "es6/esp.js",
+  "main": "es5/index.js",
+  "jsnext:main": "es6/index.js",
   "author": "Draccoz",
   "license": "ISC",
   "keywords": [
@@ -26,5 +26,12 @@
   },
   "devDependencies": {
     "typescript": "^2.0.7"
-  }
+  },
+  "files": [
+    "es5",
+    "es6",
+    "index.ts",
+    "index.d.ts",
+    "tsconfig.json"
+  ]
 }

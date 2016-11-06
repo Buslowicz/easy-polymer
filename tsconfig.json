@@ -5,11 +5,9 @@
     ],
     "noImplicitAny": false,
     "sourceMap": true,
-    "experimentalDecorators": true,
-    "declaration": true,
-    "declarationDir": "types"
+    "experimentalDecorators": true
   },
   "files": [
-    "esp"
+    "index"
   ]
 }
