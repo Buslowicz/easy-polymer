@@ -1,0 +1,29 @@
+{
+  "name": "easy-polymer",
+  "version": "0.1.0",
+  "description": "EaSy Polymer is a set of ES7/TS decorators for Polymer to save on boilerplate",
+  "main": "es5/esp.js",
+  "jsnext:main": "es6/esp.js",
+  "scripts": {
+    "es6-build": "tsc --target es6 --outDir es6 --module es6",
+    "es5-build": "tsc --target es5 --outDir es5 --module umd",
+    "build": "npm run es5-build && npm run es6-build",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "polymer",
+    "decorator",
+    "typescript",
+    "es7",
+    "es2016"
+  ],
+  "author": "Draccoz",
+  "license": "ISC",
+  "devDependencies": {
+    "typescript": "^2.0.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Draccoz/easy-polymer"
+  }
+}

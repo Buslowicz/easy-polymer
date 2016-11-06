@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es6"
+    ],
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "experimentalDecorators": true,
+    "declaration": true,
+    "declarationDir": "types"
+  },
+  "files": [
+    "esp"
+  ]
+}
