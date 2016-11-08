@@ -4,6 +4,7 @@
   "description": "EaSy Polymer is a set of ES7/TS decorators for Polymer to save on boilerplate",
   "main": "es5/index.js",
   "jsnext:main": "es6/index.js",
+  "types": "index.d.ts",
   "author": "Draccoz",
   "license": "ISC",
   "keywords": [
@@ -19,19 +20,43 @@
   },
   "homepage": "https://github.com/Draccoz/easy-polymer",
   "scripts": {
-    "es6-build": "tsc --target es6 --outDir es6 --module es6",
-    "es5-build": "tsc --target es5 --outDir es5 --module umd",
-    "build": "npm run es5-build && npm run es6-build",
+    "build": "gulp build",
     "prepublish": "npm run build"
   },
+  "config": {
+    "app": {
+      "entry": "index",
+      "src": "./",
+      "dist": "./",
+      "formats": [
+        "es",
+        "iife",
+        "iife:min"
+      ]
+    }
+  },
   "devDependencies": {
-    "typescript": "^2.0.7"
+    "gulp": "latest",
+    "gulp-empty": "^0.1.1",
+    "gulp-rename": "latest",
+    "gulp-sourcemaps": "latest",
+    "gulp-tslint": "latest",
+    "gulp-wrapper": "latest",
+    "lodash": "^4.16.6",
+    "rollup-plugin-typescript": "^0.8.1",
+    "rollup-plugin-uglify": "^1.0.1",
+    "rollup-stream": "^1.14.0",
+    "tslint": "^3.15.1",
+    "tslint-config-standard": "^1.5.0",
+    "typescript": "^2.0.7",
+    "vinyl-buffer": "^1.0.0",
+    "vinyl-source-stream": "^1.1.0"
   },
   "files": [
-    "es5",
-    "es6",
-    "index.ts",
-    "index.d.ts",
-    "tsconfig.json"
+    "*.js",
+    "*.ts",
+    "*.json",
+    "*.html",
+    "*.map"
   ]
 }

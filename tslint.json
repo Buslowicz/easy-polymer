@@ -1,0 +1,23 @@
+{
+  "extends": "tslint-config-standard",
+  "rules": {
+    "quotemark": [
+      true,
+      "double"
+    ],
+    "semicolon": true,
+    "align": [
+      true,
+      "statements"
+    ],
+    "no-angle-bracket-type-assertion": false,
+    "one-line": false,
+    "brace-style": [
+      true,
+      "stroustrup",
+      {
+        "allowSingleLine": true
+      }
+    ]
+  }
+}
