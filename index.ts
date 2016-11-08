@@ -8,17 +8,20 @@ function getPropertyDescriptor(proto, key) {
 
 function defineComponent(target) {
   let opts = this || {};
-  let config = target.prototype.config;
+  let prototype = target.prototype;
+  let config = prototype.config;
   let name = opts.name || target.name.replace(/[A-Z]/g, (c, i) => `${i === 0 ? "" : "-"}${c.toLowerCase()}`);
-  Object.defineProperties(target, {
-    is: { get: () => name },
-    config: { get: () => config }
-  });
 
   if (parseFloat(Polymer[ "version" ]) < 2) {
-    Polymer(Object[ "assign" ]({}, target.prototype, { is: target.is }, target.config));
+    prototype.is = name;
+    Object.keys(config).forEach(key => prototype[key] = config[key]);
+    Polymer(prototype);
   }
   else {
+    Object.defineProperties(target, {
+      is: { get: () => name },
+      config: { get: () => config }
+    });
     customElements.define(target.is, target);
   }
 }
