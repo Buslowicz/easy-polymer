@@ -1,13 +1,10 @@
 {
   "compilerOptions": {
+    "noEmit": true,
     "lib": [
       "es6",
       "dom"
-    ],
-    "noImplicitAny": false,
-    "sourceMap": true,
-    "noEmit": true,
-    "experimentalDecorators": true
+    ]
   },
   "files": [
     "index"

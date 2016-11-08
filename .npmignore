@@ -1,0 +1,5 @@
+/.gitignore
+/.npmignore
+/gulpfile.js
+/tslint.json
+/tsconfig.json

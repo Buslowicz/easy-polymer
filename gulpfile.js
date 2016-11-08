@@ -11,11 +11,6 @@ const source = require("vinyl-source-stream");
 const typescript = require("rollup-plugin-typescript");
 const uglify = require("rollup-plugin-uglify");
 
-const packageJson = require("./package.json");
-const CONFIG = packageJson.config;
-
-// TODO: generate html wrappers as separate files pulling iife instead of putting raw code inside
-
 function lint(src) {
   return new Promise((resolve, reject) => gulp.src(src)
     .pipe(tsLint({formatter: "prose"}))
@@ -25,14 +20,12 @@ function lint(src) {
   );
 }
 
-function build({main, src, outFile, dist, format, intro, minify = false}) {
-  let mainPath = `${src}/${main}.ts`;
-
+function build({format, minify = false, isDefaultFormat = false}) {
   let rollupOptions = {
-    format, intro,
-    entry: mainPath,
-    moduleName: packageJson.name,
-    sourceMap: true,
+    format,
+    entry: "index.ts",
+    moduleName: "ESP",
+    sourceMap: false,
     plugins: [
       typescript({
         typescript: require("typescript"),
@@ -42,6 +35,12 @@ function build({main, src, outFile, dist, format, intro, minify = false}) {
     ]
   };
 
+  if (isDefaultFormat) {
+    format = "";
+  } else {
+    format = `.${format}`;
+  }
+
   if (minify) {
     rollupOptions.plugins.push(uglify());
   }
@@ -49,58 +48,35 @@ function build({main, src, outFile, dist, format, intro, minify = false}) {
   // TODO: room for improvements?
   return new Promise((resolve, reject) =>
     rollup(rollupOptions)
-      .pipe(source(mainPath))
+      .pipe(source("index.ts"))
       .pipe(buffer())
-      .pipe(sourcemaps.init({loadMaps: true}))
-      .pipe(rename(outFile || `${main}.${format}${minify ? ".min" : ""}.js`))
+      .pipe(sourcemaps.init())
+      .pipe(rename(`index${format}${minify ? ".min" : ""}.js`))
       .pipe(sourcemaps.write("."))
-      .pipe(gulp.dest(dist))
+      .pipe(gulp.dest("."))
       .on("error", reject)
       .on("end", resolve));
 }
 
-function generateBuildTask({name, config, actions}) {
-  gulp.task(name, () => lint("index.ts")
-    .then(() => Promise.all(config.formats.map((bundle) => {
-      let [format, minify] = bundle.split(":");
-
-      return build({
-        main: config.entry,
-        src: config.src,
-        dist: config.dist,
-        intro: config.intro,
-        format: format,
-        minify: minify,
-
-        outFile: config.outFile
-      });
-    })))
-    .then(actions && (() => Promise.all(actions.map(action => action()))))
-    .catch(err => console.error(err.message)));
-}
-
 function htmlWrapModule(src) {
-  let [, dir, name] = src.match(/(.*)\/([^.\/]+)(\.[\w]+)?(\.min)?\.js/) || [];
-  if (!dir || !name) {
-    return () => Promise.reject("html wrapper has no name or path");
-  }
-  return () => new Promise((resolve, reject) => {
-    let min = src.endsWith("min.js") ? ".min" : "";
-    let fileName = `${name}${min}.html`;
-    fs.writeFile(path.join(dir, fileName), `<script src="${name}.iife${min}.js"></script>`, (err) => {
-      if (err) {
-        reject(err);
-      }
-      else {
-        resolve();
-      }
+  return new Promise((resolve, reject) => {
+    let fileName = src.endsWith("min.js") ? "index.min" : "index";
+    fs.writeFile(`${fileName}.html`, `<script src="${fileName}.js"></script>`, (err) => {
+      err ? reject(err) : resolve();
     });
   });
 }
 
-generateBuildTask({
-  name: "build", config: CONFIG.app, actions: [
-    htmlWrapModule(`${CONFIG.app.dist}/${CONFIG.app.entry}.iife.js`),
-    htmlWrapModule(`${CONFIG.app.dist}/${CONFIG.app.entry}.iife.min.js`)
-  ]
+gulp.task("build", () => {
+  lint("index.ts")
+    .then(() => Promise.all([
+      build({format: 'es'}),
+      build({format: 'umd', isDefaultFormat: true}),
+      build({format: 'umd', isDefaultFormat: true, minify: true})
+    ]))
+    .then(() => Promise.all([
+      htmlWrapModule("index.js"),
+      htmlWrapModule("index.min.js")
+    ]))
+    .catch(err => console.error(err.message));
 });
