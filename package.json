@@ -1,6 +1,6 @@
 {
   "name": "easy-polymer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "EaSy Polymer is a set of ES7/TS decorators for Polymer to save on boilerplate",
   "main": "dist/index.umd.js",
   "jsnext:main": "dist/index.es.js",
