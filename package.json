@@ -2,9 +2,8 @@
   "name": "easy-polymer",
   "version": "0.2.0",
   "description": "EaSy Polymer is a set of ES7/TS decorators for Polymer to save on boilerplate",
-  "main": "index.js",
-  "jsnext:main": "index.es.js",
-  "ts:main": "index.ts",
+  "main": "dist/index.umd.js",
+  "jsnext:main": "dist/index.es.js",
   "types": "index.d.ts",
   "author": "Draccoz",
   "license": "ISC",
@@ -15,6 +14,18 @@
     "es7",
     "es2016"
   ],
+  "config": {
+    "app": {
+      "entry": "esp",
+      "src": "./src",
+      "dist": "./dist",
+      "formats": [
+        "es",
+        "umd",
+        "umd:min"
+      ]
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Draccoz/easy-polymer"
@@ -25,6 +36,7 @@
     "prepublish": "npm run build"
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.38",
     "@types/polymer": "^1.1.28",
     "gulp": "latest",
     "gulp-rename": "latest",

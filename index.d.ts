@@ -1,4 +1,4 @@
-export declare interface ESPDecorators {
+interface ESPDecorators {
   define(nameOrTarget: string | Function): any;
   template(tpl: string): any;
   prop(proto: any, key: string): void;

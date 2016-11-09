@@ -148,3 +148,9 @@ export function observe(...args) {
   }
   observeProperty(arg0, args[ 1 ]);
 }
+
+export function dom(query: string) {
+  return (target, key) => {
+    // TODO
+  };
+}
