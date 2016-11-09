@@ -53,6 +53,8 @@
     "vinyl-source-stream": "latest"
   },
   "files": [
-    "*"
+    "dist/*",
+    "src/*",
+    "index.d.ts"
   ]
 }
