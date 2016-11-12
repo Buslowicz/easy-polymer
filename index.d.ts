@@ -1,4 +1,4 @@
-interface ESPDecorators {
+interface EasyPolymer {
   define(name: string): (target: Function) => void;
   define(target: Function): void;
   template(tpl: string): (target: Function) => void;
@@ -25,4 +25,4 @@ declare module "easy-polymer" {
   export = ESP;
 }
 
-declare var ESP: ESPDecorators;
+declare var ESP: EasyPolymer;

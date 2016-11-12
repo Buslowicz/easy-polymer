@@ -131,3 +131,4 @@ parameters names.
   @computed(String, "profile.avatar") // listen to path `profile.avatar` - type provided in decorator
   profileAvatarComputedType(avatar: string): string { return `My avatar: ${avatar}`; }
 }
+```

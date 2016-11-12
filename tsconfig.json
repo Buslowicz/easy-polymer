@@ -1,12 +1,18 @@
 {
   "compilerOptions": {
+    "experimentalDecorators": true,
+    "noImplicitUseStrict": true,
     "noEmit": true,
+    "outDir": "dist",
     "lib": [
       "es6",
       "dom"
     ]
   },
   "files": [
-    "index"
+    "src/**/*.ts"
+  ],
+  "include": [
+    "index.d.ts"
   ]
 }

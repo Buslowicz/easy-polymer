@@ -2,8 +2,8 @@
   "name": "easy-polymer",
   "version": "0.3.1",
   "description": "EaSy Polymer is a set of ES7/TS decorators for Polymer to save on boilerplate",
-  "main": "dist/index.umd.js",
-  "jsnext:main": "dist/index.es.js",
+  "main": "dist/node/esp.js",
+  "jsnext:main": "dist/es6/esp.js",
   "types": "index.d.ts",
   "author": "Draccoz",
   "license": "ISC",
@@ -14,43 +14,31 @@
     "es7",
     "es2016"
   ],
-  "config": {
-    "app": {
-      "entry": "esp",
-      "src": "./src",
-      "dist": "./dist",
-      "formats": [
-        "es",
-        "umd",
-        "umd:min"
-      ]
-    }
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Draccoz/easy-polymer"
   },
   "homepage": "https://github.com/Draccoz/easy-polymer",
   "scripts": {
-    "build": "gulp build",
-    "prepublish": "npm run build"
+    "build": "gulp",
+    "prepublish": "echo prepublish"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.38",
+    "@types/node": "^6.0.46",
     "@types/polymer": "^1.1.28",
+    "del": "^2.2.2",
     "gulp": "latest",
-    "gulp-rename": "latest",
-    "gulp-sourcemaps": "latest",
+    "gulp-rename": "^1.2.2",
+    "gulp-transform": "^1.1.0",
     "gulp-tslint": "latest",
-    "gulp-wrapper": "latest",
-    "rollup-plugin-typescript": "latest",
-    "rollup-plugin-uglify": "latest",
-    "rollup-stream": "latest",
+    "gulp-typescript": "^3.1.2",
+    "gulpfile.ts": "0.0.2",
+    "lodash": "^4.16.6",
+    "ts-node": "^1.7.0",
     "tslint": "latest",
     "tslint-config-standard": "latest",
-    "typescript": "^2.0.8",
-    "vinyl-buffer": "latest",
-    "vinyl-source-stream": "latest"
+    "typescript": "^2.0.8"
   },
   "files": [
     "dist/*",

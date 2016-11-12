@@ -1,6 +1,13 @@
 declare const customElements: { define: { (name: string, proto: any): void }};
 
-const PRIMITIVES: FunctionConstructor[] = [ String, Number, Boolean, Date, Object, Array ];
+declare type Constructor = StringConstructor
+  | NumberConstructor
+  | BooleanConstructor
+  | DateConstructor
+  | ObjectConstructor
+  | ArrayConstructor;
+
+const PRIMITIVES: Constructor[] = [ String, Number, Boolean, Date, Object, Array ];
 
 function getPropertyDescriptor(proto, key) {
   let config: any = proto.config = proto.config || {};
@@ -82,14 +89,14 @@ export function attr(proto: any, key: string): void {
   getPropertyDescriptor(proto, key).reflectToAttribute = true;
 }
 
-export function set(value: any): (proto: any, key: string) => void {
-  return (proto: any, key: string) => {
+export function set(value: any): PropertyDecorator {
+  return (proto, key) => {
     getPropertyDescriptor(proto, key).value = value;
   };
 }
 
-export function readOnly(value: any): (proto: any, key: string) => void {
-  return (proto: any, key: string) => {
+export function readOnly(value: any): PropertyDecorator {
+  return (proto, key) => {
     let descriptor = getPropertyDescriptor(proto, key);
     descriptor.readOnly = true;
     descriptor.value = value;
@@ -141,9 +148,9 @@ function observeProperty(proto: {config: any}, key: string): void {
   }
 }
 
-export function computed(type: FunctionConstructor): (proto: any, key: string) => void;
-export function computed(type: FunctionConstructor, props: string): (proto: any, key: string) => void;
-export function computed(props: string): (proto: any, key: string) => void;
+export function computed(type: FunctionConstructor): PropertyDecorator;
+export function computed(type: FunctionConstructor, props: string): PropertyDecorator;
+export function computed(props: string): PropertyDecorator;
 export function computed(proto: any, key: string): void;
 export function computed(...args) {
   let arg0 = args[ 0 ];
@@ -156,7 +163,7 @@ export function computed(...args) {
   computedProperty(arg0, args[ 1 ]);
 }
 
-export function observe(props: string): (proto: any, key: string) => void;
+export function observe(props: string): PropertyDecorator;
 export function observe(proto: any, key: string): void;
 export function observe(...args) {
   let arg0 = args[ 0 ];
