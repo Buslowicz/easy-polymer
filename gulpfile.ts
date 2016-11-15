@@ -55,7 +55,7 @@ export class Gulpfile {
         return Buffer.from(
           links.map(module => `<link rel="import" href="${module}">\n`).join("") +
           scripts.map(module => `<script src="${module}"></script>\n`).join("") +
-          `<script>\n${content}\n</script>`
+          `<script>\nvar ESP = ESP || {};\n(function(exports){${content}}(ESP));\n</script>`
         );
       }))
       .pipe(rename({ extname: ".html" }))
@@ -63,7 +63,7 @@ export class Gulpfile {
   }
 
   @Task() buildES5() {
-    return this.buildConfig(es5Project, "node");
+    return this.buildConfig(es5Project, "cjs");
   }
 
   @Task() buildES6() {
