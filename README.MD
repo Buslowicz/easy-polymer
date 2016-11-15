@@ -1,5 +1,10 @@
 # EaSy Polymer
-This project aims at providing a unified decorators for Polymer v1 and v2. Lets get to examples.
+This project aims to provide unified decorators for Polymer v1 and v2. The `dist` folder contains sources for ES6,
+CommonJS and HTML Imports for the best availability. HTML module exposes decorators in the `ESP` namespace to prevent
+the global namespace pollution.
+
+Decorators (the ones usable without `Reflect.metadata`) are fully compatible
+with ES7, so can be transpiled with either **tsc** or **babel**.
 
 ## Examples
 
