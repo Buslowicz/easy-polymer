@@ -1,3 +1,9 @@
+**DISCLAIMER:** This is a proof-of-concept library demonstrating how to build and use decorators together with Polymer. By no means this is a production ready. For advanced alternatives that are actually production ready please see one of the above:
+* [Polymer decorators](https://github.com/Polymer/polymer-decorators) (Polymer V2)
+* [Typed Web Components](https://github.com/Draccoz/twc) (Polymer V1, Polymer V2, Polymer V3)
+* [PolymerTS](https://github.com/nippur72/PolymerTS) (Polymer V1)
+* [TypedPolymer](https://github.com/Draccoz/typed-polymer) (Polymer V1)
+
 # EaSy Polymer
 This project aims to provide unified decorators for Polymer v1 and v2. The `dist` folder contains sources for ES6,
 CommonJS and HTML Imports for the best availability. HTML module exposes decorators in the `ESP` namespace to prevent
